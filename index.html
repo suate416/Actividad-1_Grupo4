@@ -14,6 +14,7 @@
       min-height: 100vh;
       margin: 0;
       padding: 2rem;
+      padding-bottom: 4rem;
       color: #e8e8e8;
       display: flex;
       flex-direction: column;
@@ -218,6 +219,44 @@
     .lista-combinaciones li::marker {
       color: #e94560;
       font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body { padding: 1.25rem; padding-bottom: 3rem; }
+      .fila-entrada-orden {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 100%;
+      }
+      .fila-entrada-orden .entrada-n,
+      .fila-entrada-orden .columna-ordenada {
+        min-width: 0;
+        max-width: none;
+      }
+      .tabs-contenedor { max-width: 100%; }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; padding-bottom: 2.5rem; }
+      h1 { font-size: 1.2rem; }
+      .subtitulo { font-size: 0.85rem; margin-bottom: 1.25rem; }
+      .contenedor-listas { gap: 1rem; flex-direction: column; }
+      .lista-caja { min-width: 0; padding: 1rem 1.25rem; }
+      .fila-entrada-orden { gap: 1rem; margin-bottom: 1rem; }
+      .entrada-n textarea { min-height: 160px; font-size: 0.9rem; }
+      .tabs-nav { flex-direction: column; gap: 0.4rem; }
+      .tab-btn { padding: 0.65rem 1rem; font-size: 0.9rem; }
+      .lista-permutaciones,
+      .lista-combinaciones { padding: 0.85rem 1rem 0.85rem 1.5rem; }
+      .lista-caja ol, .lista-caja ul { padding-left: 1rem; }
+    }
+
+    @media (max-width: 400px) {
+      body { padding: 0.75rem; padding-bottom: 2rem; }
+      h1 { font-size: 1.05rem; }
+      .entrada-n textarea { min-height: 140px; }
+      .lista-caja li, .lista-permutaciones li, .lista-combinaciones li { font-size: 0.9rem; }
     }
   </style>
 </head>
