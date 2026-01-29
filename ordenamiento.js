@@ -17,7 +17,21 @@ function actualizar() {
   }
 }
 
+function debounce(fn, ms) {
+  let t;
+  return function () {
+    clearTimeout(t);
+    t = setTimeout(fn, ms);
+  };
+}
+
+const nombreAgregado = document.getElementById("nombres");
 const btn = document.getElementById("btn-actualizar");
+
+if (nombreAgregado) {
+  nombreAgregado.addEventListener("input", debounce(actualizar, 180));
+  nombreAgregado.addEventListener("paste", debounce(actualizar, 180));
+}
 if (btn) {
   btn.addEventListener("click", actualizar);
 }
