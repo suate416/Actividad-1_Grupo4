@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problema Aplicado 1 - Matemáticas Discretas</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 2rem;
+      color: #e8e8e8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #e94560;
+    }
+    .subtitulo {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 2rem;
+    }
+    .contenedor-listas {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .lista-caja {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(233, 69, 96, 0.4);
+      border-radius: 12px;
+      padding: 1.25rem 1.75rem;
+      min-width: 200px;
+    }
+    .lista-caja h2 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 1rem 0;
+      color: #e94560;
+    }
+    .lista-caja ol,
+    .lista-caja ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      line-height: 1.8;
+    }
+    .lista-caja li {
+      font-size: 1rem;
+    }
+    .lista-caja .ordenado li::marker {
+      color: #e94560;
+    }
+    .fila-entrada-orden {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+    }
+    .fila-entrada-orden .entrada-n {
+      flex: 1;
+      min-width: 200px;
+      max-width: 420px;
+    }
+    .fila-entrada-orden .columna-ordenada {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .fila-entrada-orden .columna-ordenada .n-estudiantes {
+      margin-bottom: 0;
+    }
+    .entrada-n {
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 1.5rem;
+    }
+    .entrada-n label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: #e94560;
+    }
+    .entrada-n textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(233, 69, 96, 0.4);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e8e8e8;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+    }
+    .entrada-n textarea::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .entrada-n button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #e94560;
+      background: #e94560;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .entrada-n button:hover {
+      background: #d63a52;
+    }
+    .n-estudiantes {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: #e94560;
+      font-weight: 600;
+    }
+    .tabs-contenedor {
+      margin-top: 2rem;
+      max-width: 520px;
+      width: 100%;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 0.75rem 1.25rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(233, 69, 96, 0.35);
+      border-radius: 8px;
+      color: rgba(232, 232, 232, 0.8);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #e8e8e8;
+      border-color: rgba(233, 69, 96, 0.5);
+    }
+    .tab-btn.activo {
+      background: rgba(233, 69, 96, 0.2);
+      border-color: #e94560;
+      color: #e94560;
+      font-weight: 600;
+    }
+    .tabs-panel {
+      display: none;
+      padding-top: 1rem;
+    }
+    .tabs-panel.activo {
+      display: block;
+    }
+    #permutaciones h2,
+    #combinaciones h2 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 0.5rem 0;
+      color: #e94560;
+    }
+    .permutaciones-desc,
+    .combinaciones-desc {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+    .lista-permutaciones {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(233, 69, 96, 0.4);
+      border-radius: 12px;
+      padding: 1rem 1.5rem 1rem 2rem;
+      margin: 0;
+      line-height: 1.9;
+    }
+    .lista-permutaciones li {
+      font-size: 0.95rem;
+    }
+    .lista-permutaciones li::marker {
+      color: #e94560;
+      font-weight: 600;
+    }
+    .lista-combinaciones {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(233, 69, 96, 0.4);
+      border-radius: 12px;
+      padding: 1rem 1.5rem 1rem 2rem;
+      margin: 0;
+      line-height: 1.9;
+    }
+    .lista-combinaciones li {
+      font-size: 0.95rem;
+    }
+    .lista-combinaciones li::marker {
+      color: #e94560;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>Problema Aplicado - “Optimización de  turnos en una clase virtual”</h1>
+  <p class="subtitulo">Lista de Estudiantes en la clase de Ing. Sandra</p>
+
+  <div class="fila-entrada-orden">
+    <div class="entrada-n">
+      <label for="nombres">Ingrese los nombres de los estudiantes (uno por línea)</label>
+      <textarea id="nombres">Arnold
+Andrea
+Pavel
+Andres</textarea>
+      <button type="button" id="btn-actualizar">Actualizar</button>
+    </div>
+    <div class="columna-ordenada">
+      <p class="n-estudiantes" id="n-estudiantes">Cantidad de estudiantes: 4</p>
+      <div class="lista-caja">
+        <h2>Orden lexicográfico</h2>
+        <ol id="lista-ordenada" class="ordenado"></ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs-contenedor">
+    <nav class="tabs-nav">
+      <button type="button" class="tab-btn activo" data-tab="permutaciones">Permutaciones</button>
+      <button type="button" class="tab-btn" data-tab="combinaciones">Combinaciones</button>
+    </nav>
+    <div id="permutaciones" class="tabs-panel activo"></div>
+    <div id="combinaciones" class="tabs-panel"></div>
+  </div>
+
+  <script src="permutacion.js"></script>
+  <script src="combinacion.js"></script>
+  <script src="ordenamiento.js"></script>
+</body>
+</html>
